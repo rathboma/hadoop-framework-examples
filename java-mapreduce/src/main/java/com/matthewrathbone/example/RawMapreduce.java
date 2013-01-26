@@ -7,10 +7,7 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.mapreduce.lib.input.MultipleInputs;
 import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import java.io.IOException;
-/**
- * Hello world!
- *
- */
+
 public class RawMapreduce 
 {
     public static void main( String[] args ) throws IOException {
@@ -23,6 +20,8 @@ public class RawMapreduce
         job.setJobName("raw Mapreduce Example");
         MultipleInputs.addInputPath(job, inputTransactions, TextInputFormat.class, TransactionMapper.class);
         MultipleInputs.addInputPath(job, inputUsers, TextInputFormat.class, UserMapper.class);
-
+        job.setPartitionerClass(SecondarySort.SSPartitioner.class);
+        job.setGroupingComparatorClass(SecondarySort.SSGroupComparator.class);
+        job.setSortComparatorClass(SecondarySort.SSSortComparator.class);
     }
 }
