@@ -19,12 +19,11 @@ public class SecondarySort {
         buffer.reset(b2, s2, l2);
         b.readFields(buffer);
         return compare(a,b);  
-      } finally {
+      } catch(Exception ex) {
         return -1;
       }  
     }
   }
-  
 
   // Partition only by UID
   public static class SSPartitioner extends Partitioner<TextTuple, Object> {
@@ -36,6 +35,8 @@ public class SecondarySort {
 
   // Group only by UID
   public static class SSGroupComparator extends TTRawComparator  {
+
+    @Override
     public int compare(TextTuple first, TextTuple second) {
       return first.left.compareTo(second.left);
     }
@@ -46,6 +47,8 @@ public class SecondarySort {
   // and product-id has a sort character of 'b'
   // so the first record will be the location record!
   public static class SSSortComparator extends TTRawComparator {
+
+    @Override
     public int compare(TextTuple first, TextTuple second) {
       int lCompare = first.left.compareTo(second.left);
       if (lCompare == 0) return first.right.compareTo(second.right);

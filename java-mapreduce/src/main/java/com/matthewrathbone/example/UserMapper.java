@@ -2,7 +2,6 @@ package com.matthewrathbone.example;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapreduce.Mapper.Context;
 
 // structure of a user record is this:
 // id, email, language, location
@@ -15,7 +14,8 @@ public class UserMapper extends Mapper<LongWritable, Text, TextTuple, TextTuple>
   TextTuple outValue = new TextTuple();
   String sortChar = "a";
 
-  public void Map(LongWritable key, Text value, Context context) 
+  @Override
+  public void map(LongWritable key, Text value, Context context) 
   throws java.io.IOException, InterruptedException {
     String[] record = value.toString().split("\t");
     String uid = record[0];

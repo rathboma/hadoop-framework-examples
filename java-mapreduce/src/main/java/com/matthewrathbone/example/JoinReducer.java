@@ -2,7 +2,6 @@ package com.matthewrathbone.example;
 
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapreduce.Reducer.Context;
 
 
 // the first value is location
@@ -15,8 +14,8 @@ public class JoinReducer extends Reducer<TextTuple, TextTuple, Text, Text> {
   public void reduce(TextTuple key, Iterable<TextTuple> values, Context context) 
   throws java.io.IOException, InterruptedException {
     for (TextTuple value: values) {
-      if (value.left.toString() == "location") {
-        location = value.left;
+      if (value.left.toString().equals("location")) {
+        location = new Text(value.right);
         continue;
       }
 
