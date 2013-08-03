@@ -37,7 +37,7 @@
     <dependency>
       <groupId>org.apache.hadoop</groupId>
       <artifactId>hadoop-client</artifactId>
-      <version>2.0.0-mr1-cdh4.1.2</version>
+      <version>2.0.0-mr1-cdh4.3.1</version>
       <scope>provided</scope>
     </dependency>
     <!-- TEST DEPENDENCIES -->
@@ -56,7 +56,7 @@
     <dependency>
       <groupId>org.apache.hadoop</groupId>
       <artifactId>hadoop-test</artifactId>
-      <version>2.0.0-mr1-cdh4.1.2</version>
+      <version>2.0.0-mr1-cdh4.3.1</version>
       <scope>test</scope>
     </dependency>
     <dependency>
