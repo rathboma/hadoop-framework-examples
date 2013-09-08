@@ -1,3 +1,5 @@
+// copyright Matthew Rathbone 2013
+
 package com.matthewrathbone.helpers;
 
 import org.apache.hadoop.fs.FileSystem;
@@ -14,14 +16,14 @@ import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.UUID;
 import org.apache.commons.io.IOUtils;
 
 public class MapReduceTester {
-  private final File base = new File("target/test");
-  private final Path baseDir = new Path("file://" + base.getAbsolutePath());
+  private File base;
+  private final Path baseDir;
   private JobConf conf = new JobConf();
   private FileSystem fileSystem;
-  protected int datasetNum = 0;
 
   public static class JobArgs {
     public Configuration conf;
@@ -37,29 +39,34 @@ public class MapReduceTester {
   }
 
   public MapReduceTester() throws Exception {
+    this("target/test");
+  }
+
+  public MapReduceTester(String b) throws Exception {
+    this.base = new File(b);
+    this.baseDir = new Path("file://" + base.getAbsolutePath());
     String mrDir = "mapred/local";
-    String hdLog = "logs";
+    String logs = "logs";
     
     conf.set("mapred.local.dir", new File(base, mrDir).getAbsolutePath());
     conf.set("mapred.job.tracker.handle.count", "2");
     conf.set("tasktracker.http.threads", "2");
-    // this is to avoid heap space issues during testing
-    // as the default is 100mb. Which might not be allocatable.
+    // avoid heap space issues during testing -- default is 100
     conf.set("io.sort.mb", "20");
     conf.set("mapred.map.max.attempts", "2");
     conf.set("mapred.reduce.max.attempts", "2");
     conf.set("jobclient.completion.poll.interval", "30");
-    System.getProperties().setProperty("hadoop.log.dir", new File(base, hdLog).getAbsolutePath());
+    System.getProperties().setProperty("hadoop.log.dir", new File(base, logs).getAbsolutePath());
     this.fileSystem = FileSystem.get(baseDir.toUri(), conf);
     assert(fileSystem.mkdirs(new Path(baseDir, mrDir)));
-    assert(fileSystem.mkdirs(new Path(baseDir, hdLog)));
+    assert(fileSystem.mkdirs(new Path(baseDir, logs)));
   }
 
   public Path registerDirectory(boolean create) throws Exception {
-    Path destination = new Path(baseDir, String.valueOf(datasetNum));
+    String dirName = UUID.randomUUID().toString();
+    Path destination = new Path(baseDir, dirName);
     fileSystem.delete(destination, true);
     if (create) fileSystem.mkdirs(destination);
-    datasetNum += 1;
     return destination;
   }
 

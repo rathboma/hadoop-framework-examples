@@ -24,18 +24,16 @@ public class TextTuple implements WritableComparable<TextTuple> {
     this.right = b;
   }
 
-  @Override
   public void readFields(DataInput in) throws IOException {
     left.readFields(in);
     right.readFields(in);
   }
-  @Override
+
   public void write(DataOutput out) throws IOException {
     left.write(out);
     right.write(out);
   }
 
-  @Override
   public int compareTo(TextTuple other) {
     int leftCompare = left.compareTo(other.left);
     if (leftCompare == 0) return right.compareTo(other.right);

@@ -1,6 +1,6 @@
 SELECT 
-  productId, 
-  count(distinct loc)
+  t.productId, 
+  count(distinct u.loc)
 FROM
   transactions t
 LEFT OUTER JOIN 

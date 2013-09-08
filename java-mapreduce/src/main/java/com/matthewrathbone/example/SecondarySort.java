@@ -11,7 +11,6 @@ public class SecondarySort {
     TextTuple a = new TextTuple();
     TextTuple b = new TextTuple();
 
-    @Override
     public int compare(byte[] b1, int s1, int l1, byte[] b2, int s2, int l2 ) {
       try {
         buffer.reset(b1, s1, l1);
@@ -36,7 +35,6 @@ public class SecondarySort {
   // Group only by UID
   public static class SSGroupComparator extends TTRawComparator  {
 
-    @Override
     public int compare(TextTuple first, TextTuple second) {
       return first.left.compareTo(second.left);
     }
@@ -48,7 +46,6 @@ public class SecondarySort {
   // so the first record will be the location record!
   public static class SSSortComparator extends TTRawComparator {
 
-    @Override
     public int compare(TextTuple first, TextTuple second) {
       int lCompare = first.left.compareTo(second.left);
       if (lCompare == 0) return first.right.compareTo(second.right);

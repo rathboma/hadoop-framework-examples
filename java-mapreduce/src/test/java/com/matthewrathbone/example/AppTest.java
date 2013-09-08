@@ -27,7 +27,6 @@ public class AppTest {
         + "2\tmatthew@test2.com\tEN\tGB\n"
         + "3\tmatthew@test3.com\tFR\tFR";
 
-
         String transactionString = 
           "1\t1\t1\t300\ta jumper\n"
         + "2\t1\t2\t300\ta jumper\n"
