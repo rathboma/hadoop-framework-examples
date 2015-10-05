@@ -1,12 +1,8 @@
-package main.scala
+package main.scala.com.matthewrathbone.scalding
 
 import com.twitter.scalding._
 import cascading.tuple.TupleEntry
 
-
-// https://github.com/ANithian/scaldingsample
-// https://github.com/twitter/scalding/wiki/SQL-to-Scalding
-// bin/hadoop jar java-cascading-1.0-SNAPSHOT-jar-with-dependencies.jar com.twitter.scalding.Tool main.scala.Main --hdfs --input1 input1 --input2 input2 --output output
 class Main ( args: Args ) extends Job( args )
   {
   

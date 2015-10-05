@@ -2,8 +2,8 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 <build>
-	<sourceDirectory>src/main/scala</sourceDirectory>
-	<testSourceDirectory>src/test/scala</testSourceDirectory>
+	<sourceDirectory>src/main/scala/com/matthewrathbone/scalding</sourceDirectory>
+	<testSourceDirectory>src/test/scala/com/matthewrathbone/scalding</testSourceDirectory>
     <pluginManagement>
 			<plugins>
 				<plugin>
