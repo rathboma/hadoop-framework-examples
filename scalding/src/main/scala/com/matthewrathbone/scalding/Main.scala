@@ -3,10 +3,9 @@ package main.scala.com.matthewrathbone.scalding
 import com.twitter.scalding._
 import cascading.tuple.TupleEntry
 
-class Main ( args: Args ) extends Job( args )
-  {
-  
-    val inputFields = 'line
+class Main ( args: Args ) extends Job( args ) {
+  	
+  	val inputFields = 'line
 	val users = ( 'id, 'email, 'language, 'location)
   	val transactions = ( 'transaction_id, 'product_id, 'user_id, 'purchase_amount, 'item_description);
 	
