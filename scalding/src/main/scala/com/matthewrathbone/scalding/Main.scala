@@ -14,22 +14,20 @@ class Main ( args: Args ) extends Job( args )
 	val input2 = TextLine( args( "input2" ) )
 	val output = Tsv( args( "output" ) )
 	
-	val usersInput = input1.read.mapTo( inputFields -> users )
-    { te: TupleEntry =>
-      val split = te.getString( "line" ).split("\t");
-      (split( 0 ), split( 1 ), split( 2 ), split( 3 ))
-    }
+	val usersInput = input1.read.mapTo( inputFields -> users ) { te: TupleEntry =>
+      		val split = te.getString( "line" ).split("\t");
+      		(split( 0 ), split( 1 ), split( 2 ), split( 3 ))
+    	}
 
-	val transactionsInput = input2.read.mapTo( inputFields -> transactions )
-    { te: TupleEntry =>
-      val split = te.getString( "line" ).split("\t");
-      (split( 0 ), split( 1 ), split( 2 ), split( 3 ), split( 4 ))
-    }
+	val transactionsInput = input2.read.mapTo( inputFields -> transactions ) { te: TupleEntry =>
+      		val split = te.getString( "line" ).split("\t");
+      		(split( 0 ), split( 1 ), split( 2 ), split( 3 ), split( 4 ))
+    	}
 	
 	val joinedBranch =  transactionsInput
-			.joinWithSmaller('user_id -> 'id, usersInput)
-			.project('product_id, 'location)
-			.unique('product_id, 'location)
-			.groupBy('product_id) {group => group.size(Set('location))}
-			.write(output)
+		.joinWithSmaller('user_id -> 'id, usersInput)
+		.project('product_id, 'location)
+		.unique('product_id, 'location)
+		.groupBy('product_id) {group => group.size(Set('location))}
+		.write(output)
   }
