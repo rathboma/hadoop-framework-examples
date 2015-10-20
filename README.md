@@ -1,4 +1,4 @@
-# Real Map Reduce Workflow Examples
+# Realistic Hadoop Data Processing Examples
 
 This code is to accompany [my blog post on map reduce frameworks][1]
 
