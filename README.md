@@ -6,6 +6,16 @@ The point of the code in this repository is to provide an implementation for a b
 
 Each implementation will get it's own subdirectory with it's own build and running instructions. Each framework will also get an accompanying test, and an in-depth walkthrough about implementation details.
 
+The following implementations are complete:
+
+* Java map reduce - [walkthrough](http://blog.matthewrathbone.com/2013/02/09/real-world-hadoop-implementing-a-left-outer-join-in-hadoop-map-reduce.html)
+* Scoobi - [walkthrough](http://blog.matthewrathbone.com/2013/11/03/real-world-hadoop---implementing-a-left-outer-join-with-scoobi.html)
+* Scalding - [walkthrough](http://blog.matthewrathbone.com/2015/10/20/2015-10-20-scalding-tutorial.html)
+* Cascading - [walkthrough](http://blog.matthewrathbone.com/2015/06/25/real-world-hadoop---implementing-a-left-outer-join-in-java-with-cascading.html)
+* Hive  - [walkthrough](http://blog.matthewrathbone.com/2013/02/20/real-world-hadoop---implementing-a-left-outer-join-in-hive.html)
+* Pig - [walkthrough](http://blog.matthewrathbone.com/2013/04/07/real-world-hadoop---implementing-a-left-outer-join-in-pig.html)
+
+
 ## The problem
 
 
@@ -36,17 +46,6 @@ That's it!
 
 In the real world, we might have other questions, like the number of purchases per location for each product.
 
-
-## Implementations
-
-The following implementations are complete:
-
-* Java map reduce - [walkthrough](http://blog.matthewrathbone.com/2013/02/09/real-world-hadoop-implementing-a-left-outer-join-in-hadoop-map-reduce.html)
-* Scoobi - [walkthrough](http://blog.matthewrathbone.com/2013/11/03/real-world-hadoop---implementing-a-left-outer-join-with-scoobi.html)
-* Scalding - [walkthrough](http://blog.matthewrathbone.com/2015/10/20/2015-10-20-scalding-tutorial.html)
-* Cascading - [walkthrough](http://blog.matthewrathbone.com/2015/06/25/real-world-hadoop---implementing-a-left-outer-join-in-java-with-cascading.html)
-* Hive  - [walkthrough](http://blog.matthewrathbone.com/2013/02/20/real-world-hadoop---implementing-a-left-outer-join-in-hive.html)
-* Pig - [walkthrough](http://blog.matthewrathbone.com/2013/04/07/real-world-hadoop---implementing-a-left-outer-join-in-pig.html)
 
 
 [1]: http://blog.matthewrathbone.com/post/39783477991/a-quick-guide-to-hadoop-map-reduce-frameworks
