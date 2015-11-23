@@ -26,9 +26,10 @@ class SparkJoinsTest extends AssertionsForJUnit {
     val transactionsRDD = sc.parallelize(transactions.toSeq)
     val usersRDD = sc.parallelize(users.toSeq)
     
-    val jn = transactionsRDD.leftOuterJoin(usersRDD).values.distinct
-    
-    val result = jn.countByKey
+    //val jn = transactionsRDD.leftOuterJoin(usersRDD).values.distinct
+    //val result = jn.countByKey
+    val m = main.scala.com.matthewrathbone.spark.Main
+    val result = m.processData(transactionsRDD, usersRDD);
 
     assert(result.get(1).get === 3)
 	assert(result.get(2).get === 1)
