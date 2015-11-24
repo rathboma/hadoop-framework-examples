@@ -14,8 +14,8 @@ class SparkJoinsTest extends AssertionsForJUnit {
   
   @Before
   def initialize() {
-	 val conf = new SparkConf().setAppName("SparkJoins").setMaster("local")
-	 sc = new SparkContext(conf)
+     val conf = new SparkConf().setAppName("SparkJoins").setMaster("local")
+     sc = new SparkContext(conf)
   }
   
   @Test
