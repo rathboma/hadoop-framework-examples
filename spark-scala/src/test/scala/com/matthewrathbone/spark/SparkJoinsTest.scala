@@ -12,26 +12,25 @@ class SparkJoinsTest extends AssertionsForJUnit {
   
   var sc: SparkContext = _
   
-  @Before def initialize() {
+  @Before
+  def initialize() {
 	 val conf = new SparkConf().setAppName("SparkJoins").setMaster("local")
 	 sc = new SparkContext(conf)
   }
   
-  @Test def sortByKey() {
-    val transactions: List[Tuple2[Int, Int]] = List(new Tuple2[Int, Int](1, 1), new Tuple2[Int, Int](2, 1),
-        new Tuple2[Int, Int](2, 1), new Tuple2[Int, Int](3, 2), new Tuple2[Int, Int](3, 1))
+  @Test
+  def sortByKey() {
+    val transactions: List[Tuple2[Int, Int]] = List(new Tuple2[Int, Int](1, 1), new Tuple2[Int, Int](2, 1), new Tuple2[Int, Int](2, 1), new Tuple2[Int, Int](3, 2), new Tuple2[Int, Int](3, 1))
         
-    val users: List[Tuple2[Int, String]] = List(new Tuple2[Int, String](1, "US"), Tuple2[Int, String](2, "GB"), Tuple2[Int, String](3, "FR"))
+    val users: List[Tuple2[Int, String]] = List(new Tuple2[Int, String](1, "US"), new Tuple2[Int, String](2, "GB"), new Tuple2[Int, String](3, "FR"))
     
     val transactionsRDD = sc.parallelize(transactions.toSeq)
     val usersRDD = sc.parallelize(users.toSeq)
     
-    //val jn = transactionsRDD.leftOuterJoin(usersRDD).values.distinct
-    //val result = jn.countByKey
     val m = main.scala.com.matthewrathbone.spark.Main
     val result = m.processData(transactionsRDD, usersRDD);
 
     assert(result.get(1).get === 3)
-	assert(result.get(2).get === 1)
+    assert(result.get(2).get === 1)
   }
 }
