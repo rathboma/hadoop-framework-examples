@@ -37,8 +37,9 @@ public class SparkJoinsTest implements Serializable {
 
 	  @After
 	  public void tearDown() {
-	    sc.stop();
-	    sc = null;
+	    if (sc != null){
+            	sc.stop();
+	    }
 	  }
 	  
 	  @Test
