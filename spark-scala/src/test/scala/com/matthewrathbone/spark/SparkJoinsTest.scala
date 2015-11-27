@@ -18,6 +18,11 @@ class SparkJoinsTest extends AssertionsForJUnit {
      sc = new SparkContext(conf)
   }
   
+  @After
+  def tearDown() {
+    sc.stop()
+  }
+  
   @Test
   def sortByKey() {
     val transactions: List[Tuple2[Int, Int]] = List(new Tuple2[Int, Int](1, 1), new Tuple2[Int, Int](2, 1), new Tuple2[Int, Int](2, 1), new Tuple2[Int, Int](3, 2), new Tuple2[Int, Int](3, 1))
