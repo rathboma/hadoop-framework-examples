@@ -30,6 +30,7 @@ object Main {
 	val r = sc.parallelize(result.toSeq).map(t => (t._1.toString, t._2.toString))
 	
 	r.saveAsTextFile(args(2))
+	sc.stop()
   }
   
   
