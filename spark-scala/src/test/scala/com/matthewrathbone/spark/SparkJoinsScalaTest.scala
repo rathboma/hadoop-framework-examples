@@ -14,8 +14,8 @@ class SparkJoinsScalaTest extends AssertionsForJUnit {
   
   @Before
   def initialize() {
-	 val conf = new SparkConf().setAppName("SparkJoins").setMaster("local")
-	 sc = new SparkContext(conf)
+    val conf = new SparkConf().setAppName("SparkJoins").setMaster("local")
+    sc = new SparkContext(conf)
   }
   
   @After
@@ -29,7 +29,7 @@ class SparkJoinsScalaTest extends AssertionsForJUnit {
     val result = job.run("./transactions.txt", "./users.txt")
     assert(result.collect()(0)._1 === "1")
     assert(result.collect()(0)._2 === "3")
-	assert(result.collect()(1)._1 === "2")
-	assert(result.collect()(1)._2 === "1")
+    assert(result.collect()(1)._1 === "2")
+    assert(result.collect()(1)._2 === "1")
   }
 }
