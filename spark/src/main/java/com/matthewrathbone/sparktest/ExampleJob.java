@@ -17,7 +17,7 @@ import scala.Tuple2;
 import com.google.common.base.Optional;
 
 public class ExampleJob {
-    private JavaSparkContext sc; 
+    private static JavaSparkContext sc;
     
     public ExampleJob(JavaSparkContext sc){
     	this.sc = sc;
@@ -46,7 +46,7 @@ public class ExampleJob {
         return result;
 	}
 	
-	public JavaPairRDD<String, String> run(String t, String u){
+	public static JavaPairRDD<String, String> run(String t, String u){
         JavaRDD<String> transactionInputFile = sc.textFile(t);
         JavaPairRDD<Integer, Integer> transactionPairs = transactionInputFile.mapToPair(new PairFunction<String, Integer, Integer>() {
             public Tuple2<Integer, Integer> call(String s) {
