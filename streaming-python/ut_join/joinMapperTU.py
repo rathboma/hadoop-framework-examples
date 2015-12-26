@@ -6,7 +6,7 @@ for line in sys.stdin:
 	location = "-"
 	line = line.strip()         
 	splits = line.split("\t")         
-	if len(splits) == 6:
+	if len(splits) == 5:
 		user_id = splits[2]
 		product_id = splits[1]
 	else:
