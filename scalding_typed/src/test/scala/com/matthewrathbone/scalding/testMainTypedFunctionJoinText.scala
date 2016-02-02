@@ -1,5 +1,4 @@
-package test.scala
-
+package test.scala.com.matthewrathbone.scalding
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.WordSpec
@@ -9,9 +8,9 @@ import com.twitter.scalding.TextLine
 import com.twitter.scalding.TypedTsv
 
 @RunWith(classOf[JUnitRunner])
-class testMainTypedFunctionJoinText extends WordSpec with Matchers{
+class MainTypedFunctionJoinText extends WordSpec with Matchers{
   "Our job" should {
-    JobTest(new main.scala.Main(_))
+    JobTest(new main.scala.com.matthewrathbone.scalding.Main(_))
       .arg("input1", "usersInput")
       .arg("input2", "transactionsInput")
       .arg("output", "outputFile")

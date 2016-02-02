@@ -1,9 +1,8 @@
-package main.scala
+package main.scala.com.matthewrathbone.scalding
 
 import com.twitter.scalding._
 import TDsl._
 import cascading.tuple.TupleEntry
-import com.twitter.scalding.source.TypedText
 
 
 class Main ( args: Args ) extends Job( args ) {
