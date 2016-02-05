@@ -12,17 +12,22 @@ class Main ( args: Args ) extends Job( args ) {
 	val input1 : TypedPipe[String] = TypedPipe.from(TextLine(args( "input1" )))
 	val input2 : TypedPipe[String] = TypedPipe.from(TextLine(args( "input2" )))
 	
-	val usersInput : TypedPipe[(String, String, String, String)] = input1.map{ s:String =>
+	case class User(id: Long, email: String, language: String, location: String){}
+	val usersInput : TypedPipe[User] = input1.map{ s:String =>
       val split = s.split("\t")
-      (split( 0 ), split( 1 ), split( 2 ), split( 3 ))
+      User(split( 0 ).toLong, split( 1 ), split( 2 ), split( 3 ))
 	}
-	val group1 = usersInput.groupBy { case (id, email, language, location) => id }
-
-	val transactionsInput : TypedPipe[(String, String, String, String, String)] = input2.map{ s:String =>
+	val usersFields : TypedPipe[(Long, String, String, String)] = usersInput.map {u => (u.id, u.email, u.language, u.location) }
+	val group1 = usersFields.groupBy { case (id, email, language, location) => id }
+	
+	case class Transaction(id: Long, productId: Long, userId: Long, purchaseAmount: Double, itemDescription: String){}
+	val transactionsInput : TypedPipe[Transaction] = input2.map{ s:String =>
       val split = s.split("\t")
-      (split( 0 ), split( 1 ), split( 2 ), split( 3 ), split( 4 ))
+      Transaction(split( 0 ).toLong, split( 1 ).toLong, split( 2 ).toLong, split( 3 ).toDouble, split( 4 ))
     }
-	val group2 = transactionsInput.groupBy{ case (transaction_id, product_id, user_id, purchase_amount, item_description) => user_id }
+
+	val transactionsFields : TypedPipe[(Long, Long, Long, Double, String)] = transactionsInput.map { t => (t.id, t.productId, t.userId, t.purchaseAmount, t.itemDescription) }
+	val group2 = transactionsFields.groupBy{ case (id, productId, userId, purchaseAmount, itemDescription) => userId }
 	
 	val joinedBranch =  group2
 			.leftJoin(group1) // 'user_id -> 'id, 
@@ -30,5 +35,5 @@ class Main ( args: Args ) extends Job( args ) {
 			.distinct
 			.groupBy{ case (product_id, location) => product_id }
 			.size
-			.write(TypedTsv[(String, Long)](output))
+			.write(TypedTsv[(Long, Long)](output))
 }
